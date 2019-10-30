@@ -45,7 +45,7 @@
       service: name=docker state=started enabled=yes
 
     - name: reboot the node 
-      comand: reboot
+      command: reboot
 
 #####################################################################################################
 
