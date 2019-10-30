@@ -1,5 +1,5 @@
 ---
-- hosts: mst1
+- hosts: <hostgroup>
   become: true
   become_user: root
   tasks:
@@ -43,3 +43,14 @@
 
     - name: start docker
       service: name=docker state=started enabled=yes
+
+    - name: reboot the node 
+      comand: reboot
+
+#####################################################################################################
+
+ansible <hostgroup> -m ping --private-key=quicklab.key -u quicklab
+
+ansible-playbook -i /etc/ansible/hosts config-node.yaml --private-key=~/.ssh/quicklab.key -u quicklab
+
+#####################################################################################################
