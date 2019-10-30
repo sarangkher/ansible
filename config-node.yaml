@@ -3,8 +3,8 @@
   become: true
   become_user: root
   tasks:
-#    - name: umount /mnt
-#      command: umount /mnt
+    - name: umount /mnt
+      command: umount /mnt
 
     - lineinfile:
         path: /etc/fstab
@@ -15,8 +15,8 @@
     - name: wipefs 
       command: wipefs -a /dev/vdb
 
-#    - name: subscribe a system
-#      command: subscription-manager register --username "sakher@redhat.com" --password="POIpoiLKJlkj)(*098" --auto-attach
+    - name: subscribe a system
+      command: subscription-manager register --username "sakher@redhat.com" --password="POIpoiLKJlkj)(*098" --auto-attach
 
     - name: enable epel repo
       command: subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ansible-2.6-rpms"
