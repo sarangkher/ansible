@@ -1,5 +1,5 @@
 ---
-- hosts: <hostgroup>
+- hosts: all
   become: true
   become_user: root
   tasks:
@@ -49,8 +49,8 @@
 
 #####################################################################################################
 
-ansible <hostgroup> -m ping --private-key=quicklab.key -u quicklab
+#ansible <hostgroup> -m ping --private-key=quicklab.key -u quicklab
 
-ansible-playbook -i /etc/ansible/hosts config-node.yaml --private-key=~/.ssh/quicklab.key -u quicklab
+#ansible-playbook -i /etc/ansible/hosts config-node.yaml --private-key=~/.ssh/quicklab.key -u quicklab
 
 #####################################################################################################
