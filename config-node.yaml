@@ -16,7 +16,7 @@
       command: wipefs -a /dev/vdb
 
     - name: subscribe a system
-      command: subscription-manager register --username "sakher@redhat.com" --password="POIpoiLKJlkj)(*098" --auto-attach
+      command: subscription-manager register --username "sakher@redhat.com" --password="<password>" --auto-attach
 
     - name: enable epel repo
       command: subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ansible-2.6-rpms"
