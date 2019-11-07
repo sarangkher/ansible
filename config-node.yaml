@@ -25,9 +25,9 @@
       command: yum -y update
 
     - name: install docker
-      command: yum -y install docker wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct
+      command: yum -y install docker wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct ceph-common
 
-    - name: Template a file to /etc/files.conf
+    - name: Template /etc/sysconfig/docker-storage-setup
       template:
         src: dss.j2
         dest: /etc/sysconfig/docker-storage-setup
