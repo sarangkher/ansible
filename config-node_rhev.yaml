@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: true
+  become_user: root
+  tasks:
+#    - name: umount /mnt
+#      command: umount /mnt
+
+#    - lineinfile:
+#        path: /etc/fstab
+#        state: present
+#        regexp: '^/dev/vdb\s'
+#        line: '#/dev/vdb	/mnt	auto	defaults,nofail,x-systemd.requires=cloud-init.service,comment=cloudconfig	0	2'
+   
+#    - name: wipefs 
+#      command: wipefs -a /dev/vdb
+
+    - name: subscribe a system
+      command: subscription-manager register --username "sakher@redhat.com" --password="<password>" --auto-attach
+
+    - name: enable epel repo
+      command: subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ansible-2.6-rpms"
+
+    - name: yum update -y
+      command: yum -y update
+
+    - name: install docker
+      command: yum -y install docker wget git httpd-tools net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct ceph-common
+
+    - name: Template /etc/sysconfig/docker-storage-setup
+      template:
+        src: dssv.j2
+        dest: /etc/sysconfig/docker-storage-setup
+        owner: root
+        group: root
+        mode: '0622'
+        force: yes
+
+    - name: docker-storage-setup
+      command: docker-storage-setup
+#        notify:
+#        - start docker
+
+    - name: start docker
+      service: name=docker state=started enabled=yes
+
+    - name: reboot the node 
+      command: reboot
+
+#####################################################################################################
+
+#ansible <hostgroup> -m ping --private-key=quicklab.key -u quicklab
+
+#ansible-playbook -i /etc/ansible/hosts config-node.yaml --private-key=~/.ssh/quicklab.key -u quicklab
+
+#####################################################################################################
